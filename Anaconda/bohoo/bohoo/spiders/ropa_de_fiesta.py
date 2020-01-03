@@ -18,3 +18,9 @@ class RopaDeFiestaSpider(scrapy.Spider):
                 "Precio con descuento" : product.xpath(".//span[@class='product-sales-price']/text()").get(),
                 "Precio sin descuento" : product.xpath(".//span[@class='product-standard-price']/text()").get()
             }
+
+        siguiente_pagina= response.xpath("//li[@class='pagination-item pagination-item-next']/a/@href").get()
+
+        if siguiente_pagina:
+            print("________________________si______________________")
+            yield scrapy.Request(url= siguiente_pagina, callback= self.parse)
