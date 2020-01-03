@@ -11,10 +11,10 @@ class RopaDeFiestaSpider(scrapy.Spider):
     #xpath expresion --> //div[@class="search-result-content js-search-result-content"]//div
 
     def parse(self, response):
-        for product in response.xpath("//div[@class='search-result-content js-search-result-content']//div/div"):
+        for product in response.xpath("//div[@class='search-result-content js-search-result-content']//div"):
             yield{
-                "Titulo" : product.xpath("//div[1 and @class='product-tile-badge bottom-right']/span/text()").get(),
-                "Url" : product.xpath("//a[@class='thumb-link js-canonical-link']/text()").get(),
-                "Precio con descuento" : product.xpath("//span[@class='product-sales-price']/text()").get(),
-                "Precio sin descuento" : product.xpath("//span[@class='product-standard-price']/text()").get()
+                "Titulo" : product.xpath(".//div[1 and @class='product-tile-badge bottom-right']/span/text()").get(),
+                "Url" : product.xpath(".//div[@class='product-image load-bg']/a/@href").get(),
+                "Precio con descuento" : product.xpath(".//span[@class='product-sales-price']/text()").get(),
+                "Precio sin descuento" : product.xpath(".//span[@class='product-standard-price']/text()").get()
             }
