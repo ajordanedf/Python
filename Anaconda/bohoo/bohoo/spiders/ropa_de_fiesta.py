@@ -22,5 +22,4 @@ class RopaDeFiestaSpider(scrapy.Spider):
         siguiente_pagina= response.xpath("//li[@class='pagination-item pagination-item-next']/a/@href").get()
 
         if siguiente_pagina:
-            print("________________________si______________________")
             yield scrapy.Request(url= siguiente_pagina, callback= self.parse)
